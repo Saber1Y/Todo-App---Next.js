@@ -10,13 +10,13 @@ export default function Home() {
     setInputValue(value.target.value);
   }
 
-  const handleAddedTodos = (todos) => {
-    setTodos({ ...todos, inputValue })
+  const handleAddedTodos = () => {
+    setTodos([...todos, inputValue])
     setInputValue('');
   }
 
-  const deletedTodos = (id) => {
-    const newTodos = todos.filter((_, $) => ($ !== id));
+  const deletedTodos = (index) => {
+    const newTodos = todos.filter((_, $) => ($ !== index));
     setTodos(newTodos);
   }
 
@@ -36,15 +36,18 @@ export default function Home() {
         >Add</button>
       </div>
       <ul className="list-disc list-inline my-4">
-       {todos.map((todo, index) => {
-        <li key={index} className="flex justify-between items-center mb-3 ">
-          {todo}
-          <button className="">
-            X
-          </button>
-        </li>
-       })}
-      </ul>
-    </div>
+        {todos.map((todo, index) => (
+          < li key={index} className="flex justify-between items-center mb-3 " >
+            {todo}
+            < button className="bg-red-500 text-white font-bold py-1 px-2 rounded"
+              onClick={() => deletedTodos(index)}
+            >
+              X
+            </button>
+          </li>
+        ))
+        }
+      </ul >
+    </div >
   )
 }
