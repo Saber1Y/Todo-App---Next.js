@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 body {
-  @apply bg-[#FFF9F6];
+  @apply bg-[#FDE17B];
   margin: 0;
 }
