@@ -5,7 +5,11 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sands: 'Arial, Helvetica, sans-serif'
+      }
+    },
   },
   plugins: [],
 }

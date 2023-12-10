@@ -11,14 +11,14 @@ export default function Home() {
 
   const handleAddedTodos = () => {
     if (editingIndex !== null) {
-      
+
       const newTodos = [...todos];
       newTodos[editingIndex] = inputValue;
       setTodos(newTodos);
       setInputValue('');
       setEditingIndex(null);
     } else {
-      
+
       setTodos([...todos, inputValue]);
       setInputValue('');
     }
@@ -30,22 +30,24 @@ export default function Home() {
   }
 
   const handleEditTodo = (index) => {
-    setEditingIndex(index); 
+    setEditingIndex(index);
     const editedTodo = todos[index];
     setInputValue(editedTodo);
   };
 
   return (
-    <div className='text-black mx-auto max-w-md'>
-      <h1 className="font-bold text-2xl">Todo App</h1>
+    <div className='border border-text-black mx-auto max-w-md'>
+      <h1 className="font-sands
+       text-3xl text-center font-extrabold mt-5 text-[#FB6610]">Todo App</h1>
       <div className="flex mt-2">
         <input
-          className="border border-gray-900 mr-2 px-4 flex-grow"
+          className="border border-gray-300 focus:outline-none focus:border-blue-500 rounded-md shadow-sm px-4 py-2 flex-grow placeholder-gray-500 text-gray-700"
           type="text"
           placeholder="Enter a Todo here"
           value={inputValue}
           onChange={handleInputValue}
         />
+
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
           onClick={handleAddedTodos}
