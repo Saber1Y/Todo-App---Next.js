@@ -55,9 +55,12 @@ export default function Home() {
           {editingIndex !== null ? 'Edit' : 'Add'}
         </button>
       </div>
-      <ul className="list-disc list-inline my-4">
+      <ul className="bg-gray-100 p-4 rounded-md list-disc list-inline my-4">
         {todos.map((todo, index) => (
-          <li key={index} className="flex justify-between items-center mb-3">
+          <li
+            key={index}
+            className="flex justify-between items-center mb-3 bg-white p-3 rounded-md shadow-sm"
+          >
             <span>{todo}</span>
             <div>
               <button
@@ -76,6 +79,7 @@ export default function Home() {
           </li>
         ))}
       </ul>
+
     </div>
   );
 }
