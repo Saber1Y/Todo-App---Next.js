@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { getTodos, addTodo, updateTodo, deletedTodo } from "./axios";
+
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
