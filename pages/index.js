@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getTodos, addTodo, updateTodo, deletedTodo } from "./axios";
 
 
@@ -7,13 +7,54 @@ export default function Home() {
   const [inputValue, setInputValue] = useState('');
   const [editingIndex, setEditingIndex] = useState(null);
 
+
+  useEffect(() => {
+    fetchTodo()
+  }, [])
+
+
+  const fetchTodo = async () => {
+    try {
+      const todoData = await getTodos();
+      setTodos(todoData);
+    } catch (error) {
+      console.error('Error fetching todos', error);
+    }
+  }
+
+  const updateTodo = async () => {
+    try {
+      if (editingIndex !== null) {
+        await updateTodo(todos[editingIndex].id, { title: inputValue })
+      } else {
+        await addTodo({ title: inputValue, completed: false });
+      }
+
+      setInputValue('')
+      setEditingIndex(null)
+
+      fetchTodo();
+    } catch (error) {
+      console.error('error adding/editing todo', error);
+    }
+  }
+
+  const deletedTodo = async (id) => {
+    try {
+      await deletedTodo(id);
+
+      fetchTodo();
+    } catch (error) {
+      console.error('Error deleting todo', error);
+    }
+  }
+
   const handleInputValue = (value) => {
     setInputValue(value.target.value);
   }
 
   const handleAddedTodos = () => {
     if (editingIndex !== null) {
-
       const newTodos = [...todos];
       newTodos[editingIndex] = inputValue;
       setTodos(newTodos);

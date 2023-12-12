@@ -2,8 +2,8 @@ import axios from "axios";
 
 
 const api = axios.create({
-    baseURL: "https://jsonplaceholder.typicode.com/todos",
-}); 
+    baseURL: "https://jsonplaceholder.typicode.com",
+});
 
 export const getTodos = async () => {
     try {
@@ -16,27 +16,27 @@ export const getTodos = async () => {
 }
 export const addTodo = async (addedTodo) => {
     try {
-        const response = await api.post('./todos', newTodo)
+        const response = await api.post('./todos', addedTodo)
         return response.data;
     } catch (error) {
         console.error('error fetching todos', error)
         throw error;
     }
 }
- export const updateTodo = async (id, updateTodo) => {
+export const updateTodo = async (id, updateTodo) => {
     try {
         const response = await api.put(`./todos/${id}`, updateTodo)
         return response.data;
     } catch (error) {
         console.error('error updating todo', error)
         throw error;
-    } 
+    }
 }
 
 export const deletedTodo = async (id) => {
     try {
         const response = await api.delete(`./todos/${id}`)
-        response.data;
+        return response.data;
     } catch (error) {
         console.error('error deleting todo', error)
         throw error;
