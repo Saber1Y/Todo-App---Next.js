@@ -77,6 +77,19 @@ export default function Home() {
     setInputValue(editedTodo);
   };
 
+  const handleCheckboxChange = async (id, completed) => {
+    try {
+      
+      await updateTodo(id, { completed: !completed });
+
+     
+      fetchTodo();
+    } catch (error) {
+      console.error('Error updating todo', error);
+    }
+  };
+
+
   // const NumberedTodos = (todos) => {
   //   const NumberTodos = todos.length;
   //   return NumberTodos;
@@ -88,12 +101,12 @@ export default function Home() {
        text-3xl text-center font-extrabold mt-5 text-[#FB6610]">Todo App</h1>
       <div className="flex mt-2 mx-2">
         <input
-          className="border border-gray-300 focus:outline-none focus:border-blue-500 rounded-md shadow-sm px-4 py-2 flex-grow placeholder-gray-500 text-gray-700 font-bold font-2xl font-sands"
-          type="text"
-          placeholder="Enter a Todo here..."
-          value={inputValue}
-          onChange={handleInputValue}
+          type="checkbox"
+          className="w-5 h-5"
+          checked={todos.completed}
+          onChange={() => handleCheckboxChange(todos.id, todos.completed)}
         />
+
 
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-4 rounded-md"
@@ -109,13 +122,11 @@ export default function Home() {
             className="flex justify-between items-center mb-3 bg-[#FFF9F6] p-3 rounded-md shadow-sm"
           >
             <div className="flex items-center">
-              <input
-                type="checkbox"
-                className="w-5 h-5"
+              <input type="checkbox" className="w-5 h-5" checked={todo.completed}
               />
             </div>
-            <span className="font-bold font-sands text-[16px]">{todo}</span>
-            <div>
+            <span className="font-bold font-sands text-[16px] px-6">{todo.title}</span>
+            <div className="">
               <button
                 className="bg-blue-500 text-white font-bold py-1 px-2 rounded mr-2"
                 onClick={() => handleEditTodo(index)}

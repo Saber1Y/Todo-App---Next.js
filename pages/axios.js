@@ -8,7 +8,7 @@ const api = axios.create({
 export const getTodos = async () => {
     try {
         const response = await api.get('./todos');
-        console.log(response.data)
+        return response.data;
     } catch (error) {
         console.error('error fetching todos', error)
         throw error;
