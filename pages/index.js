@@ -36,9 +36,10 @@ export default function Home() {
     }
   };
 
-  const deleteTodoItem = async (id) => {
+  const deletedTodoItem = async (id) => {
     try {
       await deletedTodo(id);
+
       fetchTodo();
     } catch (error) {
       console.error("Error deleting todo", error);
@@ -50,10 +51,19 @@ export default function Home() {
   };
 
   const handleAddedTodos = () => {
-    updateTodoItem();
+    if (editingIndex !== null) {
+      const newTodos = [...todos];
+      newTodos[editingIndex] = { title: inputValue, completed: false };
+      setTodos(newTodos);
+      setInputValue('');
+      setEditingIndex(null);
+    } else {
+      setTodos([...todos, { title: inputValue, completed: false }]);
+      setInputValue('');
+    }
   };
-
-  const deleteTodos = (index) => {
+  
+  const deletedTodos = (index) => {
     const newTodos = todos.filter((_, $) => $ !== index);
     setTodos(newTodos);
   };
@@ -80,8 +90,8 @@ export default function Home() {
       </h1>
       <div className="flex mt-2 mx-2">
         <input
-          className="border border-gray-300 focus:outline-none focus:border-blue-500 rounded-md shadow-sm px-4 py-2 flex-grow placeholder-gray-500 text-gray-700 font-bold font-2xl font-sands"
           type="text"
+          className="border border-gray-300 focus:outline-none focus:border-blue-500 rounded-md shadow-sm px-4 py-2 flex-grow placeholder-gray-500 text-gray-700 font-bold font-2xl font-sands"
           placeholder="Enter a Todo here..."
           value={inputValue}
           onChange={handleInputValue}
@@ -108,10 +118,10 @@ export default function Home() {
                 onChange={() => handleCheckboxChange(todo.id, todo.completed)}
               />
             </div>
-            <span className="font-bold font-sands text-[16px]">
+            <span className="font-bold font-sands text-[16px] px-6">
               {todo.title}
             </span>
-            <div>
+            <div className="flex items-center text-center">
               <button
                 className="bg-blue-500 text-white font-bold py-1 px-2 rounded mr-2"
                 onClick={() => handleEditTodo(index)}
@@ -120,7 +130,7 @@ export default function Home() {
               </button>
               <button
                 className="bg-red-500 text-white font-bold py-1 px-2 rounded"
-                onClick={() => deleteTodos(index)}
+                onClick={() => deletedTodos(index)}
               >
                 X
               </button>
