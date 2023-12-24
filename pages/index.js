@@ -39,15 +39,14 @@ export default function Home() {
   const deletedTodoItem = async (id) => {
     try {
       await deletedTodo(id);
-
       fetchTodo();
     } catch (error) {
       console.error("Error deleting todo", error);
     }
   };
 
-  const handleInputValue = (event) => {
-    setInputValue(event.target.value);
+  const handleInputValue = (e) => {
+    setInputValue(e.target.value);
   };
 
   const handleAddedTodos = () => {
