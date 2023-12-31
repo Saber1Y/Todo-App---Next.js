@@ -76,7 +76,7 @@ export default function Home() {
   const handleCheckboxChange = async (id, completed) => {
     try {
       await updateTodo(id, { completed: !completed });
-      fetchTodo();
+      await fetchTodo();
     } catch (error) {
       console.error("Error updating todo", error);
     }
