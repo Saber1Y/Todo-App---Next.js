@@ -51,17 +51,19 @@ export default function Home() {
 
   const handleAddedTodos = () => {
     if (editingIndex !== null) {
+      console.log(inputValue)
       const newTodos = [...todos];
       newTodos[editingIndex] = { title: inputValue, completed: false };
       setTodos(newTodos);
       setInputValue('');
       setEditingIndex(null);
     } else {
+      if (!inputValue) return;
       setTodos([...todos, { title: inputValue, completed: false }]);
       setInputValue('');
     }
   };
-  
+
   const deletedTodos = (index) => {
     const newTodos = todos.filter((_, $) => $ !== index);
     setTodos(newTodos);
